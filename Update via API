@@ -1,0 +1,30 @@
+<label for="contact-id">Enter Contact ID:</label>
+        <input type="text" id="contact-id" name="contact-id">
+        <button id="submit-btn">Submit</button>
+        <br><br>
+        <div id="result"></div>
+        
+        <script>
+          const submitBtn = document.getElementById('submit-btn');
+          const contactIdInput = document.getElementById('contact-id');
+          const resultDiv = document.getElementById('result');
+            
+          
+          submitBtn.addEventListener('click', () => {
+            const contactId = contactIdInput.value;
+            fetch('ags1-562267618005678437.myfreshworks.com/crm/sales', {
+              method:'GET',
+              Headers: {
+                'content-type' : 'application/json'
+              },
+            })
+              .then(response => response.json())
+              .then(data => {
+                 resultDiv.innerHTML = JSON.stringify(data);
+              })
+              .catch(error => {
+                resultDiv.innerHTML = `Error: ${error.message}`;
+              });
+          });
+        </script>
+ 
